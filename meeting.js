@@ -45,7 +45,10 @@ app.get("/newmeeting", (req, res) => {
       console.log("response is: ", response);
       resp = response
       var title ='<center><h3>Meeting Information:</h3></center>'
-      var result = title + '<code><pre style="background-color:#aef8f9;">'+JSON.stringify(resp, null, 2)+ '</pre></code>'
+      var linkRaw = JSON.stringify(resp.join_url, null, 2)
+      var linkDisplay = '<center><h2>Join URL = ' + (JSON.parse(linkRaw)) + '</h2></center>'
+      //console.log(JSON.parse(link))
+      var result = title + linkDisplay + '<code><pre style="background-color:#aef8f9;">'+JSON.stringify(resp, null, 2)+ '</pre></code>'
       res.send(result);
       //res.send("create meeting result!: " + JSON.stringify(response, null, 2));
       
