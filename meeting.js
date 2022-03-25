@@ -6,9 +6,9 @@ const path = require('path');
 const fs = require('fs')
 const rp = require('request-promise');
 const jwt = require('jsonwebtoken');
+const copy = require('clipboard-copy')
 require('dotenv').config()
 
- 
  
 const payload = {
     iss: process.env.zoom_client_ID,
@@ -45,10 +45,15 @@ app.get("/newmeeting", (req, res) => {
       console.log("response is: ", response);
       resp = response
       var title ='<center><h3>Meeting Information:</h3></center>'
-      var linkRaw = JSON.stringify(resp.join_url, null, 2)
-      var linkDisplay = '<center><h2>Join URL = ' + (JSON.parse(linkRaw)) + '</h2></center>'
+      var startLinkRaw = JSON.stringify(resp.start_url, null, 2)
+      var startLinkDisplay = '<center><h3>Start URL = ' + (JSON.parse(startLinkRaw)) + '</h3></center>'
+      var joinLinkRaw = JSON.stringify(resp.join_url, null, 2)
+      var joinLinkDisplay = '<center><h3>Join URL = ' + (JSON.parse(joinLinkRaw)) + '</h3></center>'
+      var clickLink = JSON.parse(startLinkRaw)
+
       //console.log(JSON.parse(link))
-      var result = title + linkDisplay + '<code><pre style="background-color:#aef8f9;">'+JSON.stringify(resp, null, 2)+ '</pre></code>'
+      var result = title + startLinkDisplay + joinLinkDisplay + '<center><h2><a href="'+ clickLink +'"> Click Here to Start Meeting</a></h2></center>' +
+      '<code><pre style="background-color:#aef8f9;">'+ JSON.stringify(resp, null, 2) + '</pre></code>'
       res.send(result);
       //res.send("create meeting result!: " + JSON.stringify(response, null, 2));
       
