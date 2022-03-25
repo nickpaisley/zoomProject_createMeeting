@@ -5,8 +5,8 @@ from time import time
  
  
 # Enter your API key and your API secret
-API_KEY = '8Ek7GM2QSE6d4zUTU4XNtA'
-API_SEC = 'Xy8guFYS6WoPl8XF5cnqRsAUSazZr2v9'
+API_KEY = ''
+API_SEC = ''
  
 # create a function to generate a token
 # using the pyjwt library
@@ -64,6 +64,7 @@ def createMeeting():
     # print(r.text)
     # converting the output into json and extracting the details
     y = json.loads(r.text)
+    print("y", y)
     join_URL = y["join_url"]
     meetingPassword = y["password"]
  
